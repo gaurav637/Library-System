@@ -1,6 +1,6 @@
 import { BookModel } from "../../models/book.model";
 import logger from "../../utils/logger";
-import AppError from "../../utils/appError"
+import AppError from "../../utils/AppError"
 
 export const bookResolvers = {
     Query: {
