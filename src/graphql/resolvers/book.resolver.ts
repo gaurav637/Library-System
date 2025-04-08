@@ -114,6 +114,7 @@ export const bookResolvers = {
                     logger.warn("Book Not Found!!");
                     throw new AppError("Book not found!", 404);
                 }
+
                 logger.info("Book Updated Successfully!");
                 return updatedBook;
                 
