@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { bookTypeDefs } from './book.typeDefs';
+import { authorTypeDefs } from './author.typeDefs';
 import { gql } from 'apollo-server-express';
 
 const rootTypeDefs = gql`
@@ -10,6 +11,7 @@ const rootTypeDefs = gql`
 export const typeDefs = [
   rootTypeDefs,
   bookTypeDefs,
+  authorTypeDefs
 ];
 
 export const schema = makeExecutableSchema({
