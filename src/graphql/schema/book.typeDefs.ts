@@ -5,7 +5,7 @@ export const bookTypeDefs = gql`
     type Book {
         _id: ID!
         title: String!
-        author: ID
+        author: [ID!]
         description: String!
         category: String!
         price: Float!
@@ -13,16 +13,17 @@ export const bookTypeDefs = gql`
         publisher: String!
         language: String!
         pages: Int!
-        stock: Int!
+        stock: Boolean!
         ratingAvg: Float!
         ratingCount: Int!
+        reviews: ID
         createdAt: String
         updatedAt: String
     }
 
     input BookInput {
         title: String!
-        author: ID!
+        author: [ID!]
         description: String!
         category: String!
         price: Float!
@@ -30,7 +31,7 @@ export const bookTypeDefs = gql`
         publisher: String!
         language: String!
         pages: Int!
-        stock: Int!
+        stock: Boolean!
     }
 
     input UpdateBookInput {
@@ -43,17 +44,31 @@ export const bookTypeDefs = gql`
         publisher: String
         language: String
         pages: Int
-        stock: Int
+        stock: Boolean
+    }
+
+    type PaginateBook {
+        data: [Book]
+    }
+
+    input BookFilterInput {
+        title: String
+        description: String
+        price: String
+        author: String
+        category: String
     }
 
     type Query {
         getAllBooks: [Book!]
         getBookById(id: ID!): Book
+        getBooksByFilter(filter: BookFilterInput, page: Int!, limit: Int!): PaginateBook!
+        searchBooksBySearchKey(searchKey: String!, page: Int!, limit: Int!): PaginateBook!
     }
 
     type Mutation {
         addNewBook(bookInput: BookInput): Book!
-        updateBook(id: ID!, input: UpdateBookInput!): Book
-        deleteBook(id: ID!): String
+        updateBookById(id: ID!, input: UpdateBookInput!): Book!
+        deleteBookById(id: ID!): Book!
     }
 `;
