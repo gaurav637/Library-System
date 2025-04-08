@@ -13,5 +13,5 @@ export interface Book {
     stock: number;
     ratingAvg: number;
     ratingCount: number;
-    // reviews: mongoose.Types.ObjectId
+    reviews: mongoose.Types.ObjectId
 }

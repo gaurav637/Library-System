@@ -6,11 +6,13 @@ const BookSchema = new Schema<Book & Document>({
         type: String, 
         required: true 
     },
-    author: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Author', 
-        required: true 
-    },
+    author: [
+        { 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Author', 
+            required: true 
+        }
+    ],
     description: { 
         type: String, 
         required: true 
@@ -51,10 +53,12 @@ const BookSchema = new Schema<Book & Document>({
         type: Number,
         default: 0 
     },
-    // reviews: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Reviews'
-    // }
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Reviews'
+        }
+    ]
 },{ timestamps: true }
 );
 
