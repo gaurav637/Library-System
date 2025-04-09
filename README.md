@@ -146,6 +146,59 @@ In this project, I have developed a Library Management System using GraphQL API.
 <img width="726" alt="Screenshot 2025-04-09 at 8 38 48 PM" src="https://github.com/user-attachments/assets/e630760b-ca34-4320-a392-3f5db5d7a142" />
 
 
+## **## API Documents**
+
+  ### Create a New User
+   - **Mutation:**
+     ```json
+        {
+          mutation Mutation($userInput: UserInput!) {
+              createNewUser(userInput: $userInput) {
+                   name
+                   email
+                   phone
+                   password
+                   profileImage
+              }
+         }"
+     }
+     ```
+   - **Description:** Creates a new User.
+   - **Variables:**
+     ```json
+        {
+           "userInput": {
+            "name": "Vikram Singh",
+               "email": "vikram.singh@example.com",
+               "phone": "9876501234",
+               "password": "Vikram@123",
+               "profileImage": "https://dummyimage.com/300x300/000/fff&text=Vikram"
+           }
+        }
+     ```
+   - Response:
+     - 201 Created
+       ```json
+         {
+             {
+              "data": {
+                "createNewUser": {
+                  "name": "Vikram Singh",
+                  "email": "vikram.singh@example.com",
+                  "phone": "9876501234",
+                  "password": "Vikram@123",
+                  "profileImage": "https://dummyimage.com/300x300/000/fff&text=Vikram"
+                }
+              }
+            }
+       }
+     ```
+
+
+
+
+
+
 ## **Contributing**
 
 Contributions are welcome! Please follow these guidelines:
