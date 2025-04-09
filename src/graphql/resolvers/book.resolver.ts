@@ -123,7 +123,6 @@ export const bookResolvers = {
                 throw new AppError("Failed During Update the Book Data!!", 500);
             }
         },
-        
 
         deleteBookById: async (_: any, { id }: {id: string}) => {
             try {
