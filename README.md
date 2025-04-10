@@ -128,20 +128,27 @@ In this project, I have developed a Library Management System using GraphQL API.
   style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
   refactor: A code change that neither fixes a bug nor adds a feature 
   perf:     A code change that improves performance 
-```
+
 ### 4. Push code
-   ```
-      git push origin -u branch_name 
-      
+```
+ git push origin -u branch_name 
+ ```  
 
 ## **ER - Diagram**
 
 <img width="604" alt="Screenshot 2025-04-09 at 6 57 27 PM" src="https://github.com/user-attachments/assets/dac8a015-9a5e-4e47-9956-e500b731cb28" />
 
 
-## **FLow of my Code**
+## **Flow of my Code**
 
 <img width="726" alt="Screenshot 2025-04-09 at 8 38 48 PM" src="https://github.com/user-attachments/assets/e630760b-ca34-4320-a392-3f5db5d7a142" />
+
+
+## Test Coverage of my code
+
+
+<img width="725" alt="Screenshot 2025-04-10 at 8 02 06 PM" src="https://github.com/user-attachments/assets/3a71e99e-ea85-4417-af7a-be3bd5419397" />
+
 
 
 ## **API Documents**
@@ -190,8 +197,8 @@ In this project, I have developed a Library Management System using GraphQL API.
                "profileImage": "https://dummyimage.com/300x300/000/fff&text=Vikram"
              }
            }
-        }
-     ```
+          }
+        ```
 
   ### Update User Data
    - **Mutation:**
@@ -230,7 +237,7 @@ In this project, I have developed a Library Management System using GraphQL API.
              }
            }
          }
-     ```
+       ```
 
  ### Delete User Data
    - **Mutation:**
@@ -265,7 +272,7 @@ In this project, I have developed a Library Management System using GraphQL API.
              }
            }
          }
-     ```
+       ```
 
  ### Get All User Data
    - **Description:** Get All Users data.
@@ -301,7 +308,7 @@ In this project, I have developed a Library Management System using GraphQL API.
               ]
             }
          }
-     ```
+       ```
 
  ### Get User By Id
    - **Query:**
@@ -338,8 +345,315 @@ In this project, I have developed a Library Management System using GraphQL API.
              }
            }
          }
+       ```
+
+
+### Book:- 
+
+  ### Add New Book
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($bookInput: BookInput!) {
+           addNewBook(bookInput: $bookInput) {
+                 _id
+                title
+                description
+                price
+                stock
+                category
+                author
+                publishYear
+                publisher
+                language
+                stock
+           }
+       }
      ```
 
+   - **Description:** Add a new Book.
+   - **Variables:**
+     ```json
+        {
+          "bookInput": {
+            "title": "MongoDB for Beginners",
+            "description": "Step by step guide to learn MongoDB NoSQL database.",
+            "category": "Database",
+            "author": ["6610f26dbf4563abc1234567"],
+            "price": 399,
+            "publishYear": 2021,
+            "publisher": "DB Publisher",
+            "language": "English",
+            "pages": 290,
+            "stock": true
+          }
+        }
+      ```
+   - Response:
+     - 201 Created
+       ```json
+         {
+           "data": {
+             "addNewBook": {
+               "_id": "67f7661399db8677d904434a",
+               "title": "MongoDB for Beginners",
+               "description": "Step by step guide to learn MongoDB NoSQL database.",
+               "price": 399,
+               "stock": true,
+               "category": "Database",
+               "author": [
+                 "6610f26dbf4563abc1234567"
+               ],
+               "publishYear": 2021,
+               "publisher": "DB Publisher",
+               "language": "English"
+             }
+           }
+         }
+       ```
+
+### Update Book by bookID
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($id: ID!, $input: UpdateBookInput!) {
+           updateBookById(id: $id, input: $input) {
+             _id
+             title
+             description
+             price
+             stock
+             category
+             publishYear
+             publisher
+             language
+           }
+       }
+     ```
+
+   - **Description:** Update book data by bookId
+   - **Variables:**
+     ```json
+        {
+           "id": "67f4b6d838cad949d995baed",
+           "input": {
+             "title": "About Gaurav Negi",
+             "description": "Updated Description",
+             "price": 999,
+             "stock": true,
+             "category": "Programming in java",
+             "publishYear": 2024,
+             "publisher": "TechBooks PB",
+             "language": "English"
+           }
+        }
+     ```
+   - Response:
+     - 200 Updated.
+       ```json
+         {
+           "data": {
+             "updateBookById": {
+               "_id": "67f4b6d838cad949d995baed",
+               "title": "About Gaurav Negi",
+               "description": "Updated Description",
+               "price": 999,
+               "stock": true,
+               "category": "Programming in java",
+               "publishYear": 2024,
+               "publisher": "TechBooks PB",
+               "language": "English"
+             }
+           }
+         }
+       ```
+
+### Delete Book by bookID
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($id: ID!) {
+           deleteBookById(id: $id){
+             _id
+             title
+             description
+             price
+             stock
+             category
+             author
+             publishYear
+             publisher
+             language
+             stock
+           }
+       }
+     ```
+
+   - **Description:** Delete book data by bookId
+   - **Variables:**
+     ```json
+         {
+           "id": "67f4b59db88f9faf28fd39ba"
+         }
+     ```
+   - Response:
+     - 200 Deleted.
+       ```json
+         {
+           "data": {
+             "deleteBookById": {
+               "_id": "67f4b59db88f9faf28fd39ba",
+               "title": "Mastering Node.js",
+               "description": "Learn backend development using Node.js from scratch.",
+               "price": 499,
+               "stock": true,
+               "category": "Programming",
+               "author": [
+                 "6610f26dbf4563abc1234567"
+               ],
+               "publishYear": 2023,
+               "publisher": "TechMaster Publication",
+               "language": "English"
+             }
+           }
+         }
+       ```
+
+  ### Get Book By Id
+   - **Query:**
+     ```graphql
+        query($getBookByIdId: ID!) {
+           getBookById(id: $getBookByIdId) {
+             _id
+             title
+             description   
+           }
+        }
+     ```
+
+   - **Description:** Get Book data by bookId.
+   - **Variables:**
+     ```json
+        {
+           "getBookByIdId": "67f3d2f3c630fbf48e31e520"
+        }
+     ```
+   - Response:
+     - 200 get book By Id
+       ```json
+         {
+           "data": {
+             "getBookById": {
+               "_id": "67f3d2f3c630fbf48e31e520",
+               "title": "GraphQL with Node.js",
+               "description": "Complete guide to learn GraphQL with Node.js"
+             }
+           }
+         }
+       ```
+
+### Get all Books
+   - **Description:** Get all Books data.
+   - **Query:**
+     ```graphql
+        query {
+           getAllBooks {
+             _id
+             title
+             description
+           }
+        }
+     ```
+   - Response:
+     - 200 get All Books
+         ```json
+         {
+           "data": {
+             "getAllBooks": [
+                  {
+                    "_id": "67f3d2f3c630fbf48e31e520",
+                    "title": "GraphQL with Node.js",
+                    "description": "Complete guide to learn GraphQL with Node.js"
+                  },
+                  {
+                    "_id": "67f4b68eb88f9faf28fd39bc",
+                    "title": "Mastering Node.js",
+                    "description": "Learn backend development using Node.js from scratch."
+                  },
+                  {
+                    "_id": "67f4b6d838cad949d995baed",
+                    "title": "About Gaurav Negi",
+                    "description": "Updated Description"
+                  },
+                  {
+                    "_id": "67f4b73538cad949d995baef",
+                    "title": "Fullstack Development with MERN",
+                    "description": "Complete guide for Fullstack Development using MongoDB, Express, React, and Node.js."
+                  }
+                ]
+            }
+        }
+        ```
+
+### Get Books By filter
+   - **Description:** Get Books data by filter various fields.
+   - **Query:**
+     ```graphql
+        query {
+           getBooksByFilter(filter: { title: "Mas"}, page: 1, limit: 5) {
+             _id
+             title
+             stock
+           }
+        }
+     ```
+   - Response:
+     - 200 get book By filter
+       ```
+         {
+           "data": {
+             "getBooksByFilter": [
+               {
+                 "_id": "67f4b68eb88f9faf28fd39bc",
+                 "title": "Mastering Node.js",
+                 "stock": true
+               }
+             ]
+           }
+         }
+       ```
+
+ ### Search Books
+   - **Description:** Search the Book by various fields.
+   - **Query:**
+     ```graphql
+        query {
+           searchBooksBySearchKey(searchKey: "Mastering", page: 1, limit: 5) {
+             _id
+             title
+             description
+             author
+             price
+           }
+        }
+     ```
+
+   - Response:
+     - 200 get book By searchKey
+       ```json
+         {
+           "data": {
+             "searchBooksBySearchKey": [
+               {
+                 "_id": "67f4b68eb88f9faf28fd39bc",
+                 "title": "Mastering Node.js",
+                 "description": "Learn backend development using Node.js from scratch.",
+                 "author": [
+                   "6610f26dbf4563abc1234567"
+                 ],
+                 "price": 499
+               }
+             ]
+           }
+         }
+       ```
 
 ### Book:- 
 
@@ -1058,6 +1372,409 @@ In this project, I have developed a Library Management System using GraphQL API.
 
 
 
+### Author:-
+
+### Add New Author
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($authorInput: AuthorInput!) {
+           addNewAuthor(authorInput: $authorInput) {
+             name
+             bio
+             dob
+             nationality
+             awards
+             website
+             profileImage
+             Address
+           }
+      }
+
+     ```
+
+   - **Description:** Add a new Author.
+   - **Variables:**
+     ```json
+        {
+          "authorInput": {
+            "name": "Ankit Joshi",
+            "bio": "DevOps Engineer",
+            "dob": "1992-12-30",
+            "nationality": "Indian",
+            "awards": "Cloud Specialist 2023",
+            "website": "https://ankitjoshi.dev",
+            "profileImage": "https://dummyimage.com/300x300/000/fff&text=Ankit",
+            "Address": ["661234abcd1234abcd1234b6"]
+          }
+       }
+     ```
+   - Response:
+     - 201 Created
+       ```json
+         {
+           "data": {
+             "addNewAuthor": {
+               "name": "Ankit Joshi",
+               "bio": "DevOps Engineer",
+               "dob": "1992-12-30T00:00:00.000Z",
+               "nationality": "Indian",
+               "awards": "Cloud Specialist 2023",
+               "website": "https://ankitjoshi.dev",
+               "profileImage": "https://dummyimage.com/300x300/000/fff&text=Ankit",
+               "Address": null
+             }
+           }
+         }
+      ```
+
+### Update Author by authorID
+   - **Mutation:**
+     ```graphql
+           mutation Mutation($id: ID!, $authorInput: AuthorInput!) {
+              updateAuthor(id: $id, authorInput: $authorInput) {
+                bio
+                dob
+                name
+                nationality
+                Address
+              }
+           }
+     ```
+
+   - **Description:** Update Author data by authorId
+   - **Variables:**
+     ```json
+        {
+           "id":"67f521a6dd496473a6d809ca",
+           "authorInput": {
+               "bio": "Software Engineer 2",
+               "dob": "1998-05-15T00:00:00.000Z",
+               "name": "Mohan Kumar",
+               "nationality": "Indian",
+               "Address": ["djfksd903940394fd"]
+           }
+        }
+     ```
+   - Response:
+     - 200 Updated.
+       ```json
+         {
+           "data": {
+             "updateAuthor": {
+               "bio": "Software Engineer 2",
+               "dob": "1998-05-15T00:00:00.000Z",
+               "name": "Mohan Kumar",
+               "nationality": "Indian",
+               "Address": null
+             }
+           }
+         }
+        ```
+
+### Delete Author by authorId
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($deleteAuthorId: ID!) {
+           deleteAuthor(id: $deleteAuthorId) {
+             _id
+             name
+             bio
+             dob
+          }
+       }
+     ```
+
+   - **Description:** Delete Author data by AuthorId
+   - **Variables:**
+     ```json
+         {
+           "deleteAuthorId": "67f77489a7a720a82836cfe5"
+         }
+     ```
+   - Response:
+     - 200 Deleted.
+       ```json
+         {
+           "data": {
+             "deleteAuthor": {
+               "_id": "67f77489a7a720a82836cfe5",
+               "name": "Ankit Joshi",
+               "bio": "DevOps Engineer",
+               "dob": "1992-12-30T00:00:00.000Z"
+             }
+           }
+        }
+        ```
+
+  ### Get Author By Id
+   - **Description:** Get Author data by AuthorId.
+   - **Query:**
+     ```graphql
+        query($getAuthorByIdId: ID!) {
+           getAuthorById(id: $getAuthorByIdId) {
+             _id
+             name
+             dob
+             bio
+           }
+      }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "getAuthorByIdId": "67f521a6dd496473a6d809ca"
+         }
+     ```
+   - Response:
+     - 200 get Author By Id
+       ```json
+         {
+           "data": {
+             "getAuthorById": {
+               "_id": "67f521a6dd496473a6d809ca",
+               "name": "Mohan Kumar",
+               "dob": "1998-05-15T00:00:00.000Z",
+               "bio": "Software Engineer 2"
+             }
+           }
+         }
+       ```
+
+### Get all Authors
+   - **Description:** Get all Authors data.
+   - **Query:**
+     ```graphql
+        query {
+           getAllAuthor {
+             _id
+             bio
+             dob
+             name
+             nationality
+           }
+        }
+     ```
+   - Response:
+     - 200 get All Authors
+       ```json
+         {
+           "data": {
+             "getAllAuthor": [
+               {
+                 "_id": "67f521a6dd496473a6d809ca",
+                 "bio": "Software Engineer 2",
+                 "dob": "1998-05-15T00:00:00.000Z",
+                 "name": "Mohan Kumar",
+                 "nationality": "Indian"
+               },
+               {
+                 "_id": "67f521efdd496473a6d809cc",
+                 "bio": "Full Stack Developer",
+                 "dob": "1995-02-20T00:00:00.000Z",
+                 "name": "Rahul Sharma",
+                 "nationality": "Indian"
+               }
+             ]
+          }
+       } 
+        ```
+
+### Search Authors
+   - **Description:** search authors by searchKey
+   - **Query:**
+     ```graphql
+        query {
+           searchAuthor(searchKey: "Rahul Sharma",page: 1,limit: 3) {
+             _id
+             name
+             nationality
+             bio
+             dob
+           }
+        }
+     ```
+   - Response:
+     - 200 Search by searchKey
+       ```json
+         {
+           "data": {
+             "searchAuthor": [
+               {
+                 "_id": "67f521efdd496473a6d809cc",
+                 "name": "Rahul Sharma",
+                 "nationality": "Indian",
+                 "bio": "Full Stack Developer",
+                 "dob": "1995-02-20T00:00:00.000Z"
+               }
+             ]
+           }
+         }
+        ```
+
+     
+### Borrow Records:
+
+   ### Get Borrow Book By Id
+   
+   - **Description:** Get Borrowed Books for userId.
+   - **Query:**
+     ```graphql
+        query($getBorrowedBooksByUserIdId: ID!) {
+           getBorrowedBooksByUserId(id: $getBorrowedBooksByUserIdId) {
+             _id
+             userId
+             bookId
+             fine
+           }
+       }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "getBorrowedBooksByUserIdId": "67f5f3cc3741f9d8c1f9d2f9"
+         }
+   
+   - Response:
+     - 200 get borrowed books for userID
+       ```json
+         {
+           "data": {
+             "getBorrowedBooksByUserId": [
+               {
+                 "_id": "67f63631da44fd4e9eaede7b",
+                 "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                 "bookId": "67f4b79c38cad949d995baf7",
+                 "fine": 10
+               },
+               {
+                 "_id": "67f6422f1af8cb4e4f357575",
+                 "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                 "bookId": "67f4b79c38cad949d995baf7",
+                 "fine": null
+               }
+             ]
+           }
+        }
+        ```
+
+### get All Borrowed Books
+
+   - **Description:** get All Borrowed Books in library
+   - **Query:**
+     ```graphql
+        query {
+           getAllBorrowedBooks {
+             _id
+             bookId
+             userId
+             borrowDate
+             fine
+           }
+       }
+     ```
+   - Response:
+     - 200 Borrowed Books
+       ```json
+         {
+           "data": {
+             "getAllBorrowedBooks": [
+                  {
+                    "_id": "67f63603da44fd4e9eaede77",
+                    "bookId": "67f4b59db88f9faf28fd39ba",
+                    "userId": "67f5f3b63741f9d8c1f9d2f7",
+                    "borrowDate": "2025-04-01T00:00:00.000Z",
+                    "fine": null
+                  },
+                  {
+                    "_id": "67f63631da44fd4e9eaede7b",
+                    "bookId": "67f4b79c38cad949d995baf7",
+                    "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                    "borrowDate": "2025-04-02T00:00:00.000Z",
+                    "fine": 10
+                  },
+                  {
+                    "_id": "67f63fb2ff409d0363b42377",
+                    "bookId": "67f3d2f3c630fbf48e31e520",
+                    "userId": "67f5f3893741f9d8c1f9d2f5",
+                    "borrowDate": "2025-04-01T00:00:00.000Z",
+                    "fine": 50
+                  }
+             ]
+          }
+        }
+        ```
+### Mark Book As Borrow By User
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($borrowBookInput: BorrowBookInput) {
+           markBookAsBorrowByUser(borrowBookInput: $borrowBookInput) {
+             userId,
+             bookId
+             borrowDate
+             returnDate
+           }
+        }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "borrowBookInput": {
+             "userId": "67f5f3cc3741f9d8c1f9d2f9",
+             "bookId": "67f4b79c38cad949d995baf7",
+             "borrowDate": "2025-04-01",
+             "returnDate": "2025-04-06"
+           }
+        }
+     ```
+   - Response:
+     - 200 Marked Books
+       ```json
+         {
+           "data": {
+             "markBookAsBorrowByUser": {
+               "userId": "67f5f3cc3741f9d8c1f9d2f9",
+               "bookId": "67f4b79c38cad949d995baf7",
+               "borrowDate": "2025-04-01T00:00:00.000Z",
+               "returnDate": "2025-04-06T00:00:00.000Z"
+             }
+           }
+        }
+        ```
+### Return Borrowed Book by user
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($returnABorrowedBookByUserUserId2: ID!, $returnABorrowedBookByUserBookId2: ID!) {
+           returnABorrowedBookByUser(userId: $returnABorrowedBookByUserUserId2, bookId: $returnABorrowedBookByUserBookId2) {
+             userId
+             bookId
+             borrowDate
+             returnDate
+             fine
+           }
+       }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "returnABorrowedBookByUserUserId2": "67f5f3b63741f9d8c1f9d2f7",
+           "returnABorrowedBookByUserBookId2": "67f4b59db88f9faf28fd39ba"
+        }
+     ```
+   - Response:
+     - 200 return Books
+       ```json
+         {
+           "data": {
+             "returnABorrowedBookByUser": {
+               "userId": "67f5f3b63741f9d8c1f9d2f7",
+               "bookId": "67f4b59db88f9faf28fd39ba",
+               "borrowDate": "2025-04-01T00:00:00.000Z",
+               "returnDate": "2025-04-08T00:00:00.000Z",
+               "fine": 30
+             }
+           }
+       }
+        ```
 ## **Contributing**
 
 Contributions are welcome! Please follow these guidelines:
