@@ -49,6 +49,8 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Run Jest Test Cases
+        run: yarn test --ci --coverage
       # - name: Lint Check
       #   run: yarn lint || echo "Lint warnings found"
 
