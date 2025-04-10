@@ -4,9 +4,9 @@ import AppError from '../src/utils/AppError';
 import logger from '../src/utils/logger';
 import * as paginationModule from '../src/utils/pagination';
 
-jest.mock('../models/user.model');
-jest.mock('../utils/pagination');
-jest.mock('../utils/logger', () => ({
+jest.mock('../src/models/user.model');
+jest.mock('../src/utils/pagination');
+jest.mock('../src/utils/logger', () => ({
   info: jest.fn(),
   error: jest.fn(),
 }));
