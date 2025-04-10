@@ -40,7 +40,7 @@ export const bookResolvers = {
 
         getBooksByFilter: async (_: any, { filter, page, limit }: {filter: any, page: number, limit: number}) => {
             try {
-                logger.info("Get Book Data By Filtering");
+                logger.info(`Get Book Data By Filtering`);
                 const query : any = {};
                 if(filter) {
                     Object.keys(filter).forEach((key) => {
