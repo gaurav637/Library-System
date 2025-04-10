@@ -38,7 +38,7 @@ export const userTypeDefs = gql`
 
     type Mutation {
         createNewUser(userInput: UserInput!): User!
-        updateUser(id: ID!, userInput: UserInput!): User!
+        updateUser(id: ID!, userInput: UpdateUserInput!): User!
         deleteUser(id: ID!): User!
     }
 `;

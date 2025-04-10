@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 import { User } from '../intefaces/user.interface';
+const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema<User & Document>({
     name: {
@@ -36,5 +37,26 @@ const UserSchema = new Schema<User & Document>({
     }
 }, {timestamps: true}
 );
+
+UserSchema.pre('save', async function (next) {
+    if (this.isModified('password')) { 
+      const hashedPassword = await bcrypt.hash(this.password, 10);
+      this.password = hashedPassword;
+    }
+    next();
+});
+
+UserSchema.pre('findOneAndUpdate', async function (next) {
+    const update = this.getUpdate() as { password?: string }; ;
+    if(update) {
+        if(update.password) {
+            const hassedPassword = await bcrypt.hash(update.password, 10);
+            update.password = hassedPassword;
+            this.setUpdate(update);
+        }
+    }
+    next();
+});
+
 
 export const UserModel: Model<User & Document> = mongoose.model('User', UserSchema);
