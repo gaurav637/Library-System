@@ -1,7 +1,8 @@
-import { bookResolvers } from '../graphql/resolvers/book.resolver';
-import { BookModel } from '../models/book.model';
-import * as paginationModule from '../utils/pagination';
-import logger from '../utils/logger';
+import { bookResolvers }  from '../src/graphql/resolvers/book.resolver';
+import { BookModel } from '../src/models/book.model';
+import AppError from '../src/utils/AppError';
+import logger from '../src/utils/logger';
+import * as paginationModule from '../src/utils/pagination';
 
 jest.mock('../models/book.model');
 jest.mock('../utils/pagination');
