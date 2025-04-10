@@ -163,6 +163,7 @@ In this project, I have developed a Library Management System using GraphQL API.
          }
       }
 
+     ```
    - **Description:** Creates a new User.
    - **Variables:**
      ```json
@@ -203,6 +204,7 @@ In this project, I have developed a Library Management System using GraphQL API.
                 phone
            }
        }
+     ```
 
    - **Description:** Update User data by UserId.
    - **Variables:**
@@ -241,6 +243,7 @@ In this project, I have developed a Library Management System using GraphQL API.
              phone
            }
         }
+     ```
 
    - **Description:** Delete User data by UserId.
    - **Variables:**
@@ -275,6 +278,7 @@ In this project, I have developed a Library Management System using GraphQL API.
              email
            }
         }
+     ```
 
    - Response:
      - 200 List all Users
@@ -311,6 +315,7 @@ In this project, I have developed a Library Management System using GraphQL API.
              password
            }
          }
+     ```
 
    - **Description:** Get User data by UserId.
    - **Variables:**
