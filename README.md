@@ -42,37 +42,54 @@ In this project, I have developed a Library Management System using GraphQL API.
    - TypeScript
    - GraphQL
    - MongoDB 
-   - Apollo Server
-   - CI/CD
 
 ## Prerequisites
-  - Node.js 
+  - Node.js
+    ```
+    brew install node
+    ```
   - MongoDB
+    ```
+    brew tap mongodb/brew
+    brew update
+    brew install mongodb-community@8.0
+    ```
   - Docker
-  - GraphQL
-  - Git/Github
-  - CI/CD
-  - Server
+    ```
+    brew install docker
+    ```
+
+## **Running Application using Docker**   
+
+### 1. Build Docker Images
+   ```
+     docker-compose up --build
+   ```   
     
-## **Installation**
+## **Local Setup without Docker**
 
-### 1. Clone the repository: 
-   ```
-      https://github.com/gaurav637/Library-System
-   ```
-### 2. Navigate to the project directory:
-   ```
-       cd Backend
-   ```
-### 3. Open the project in your IDE:
+### 1. Check if your mongo is running and if not running use below command 
 
- VS Code (recommended) or IntelliJ IDEA
- 
-### 4. Create a .env file in the root directory:
+```
+   brew services list
+```
+```
+   brew services start mongodb-community
+``` 
+      
+### 2. Clone the repository: 
+   ```
+     git clone https://github.com/gaurav637/Library-System
+   ```
+### 3. Navigate to the project directory:
+   ```
+       cd Library-System
+   ```
+### 4. Create a .env file in the your current directory:
    ```
      .env
    ```
-### 5. Configure the environment variables:
+### 5. Add below lines in your .env file:
    ```
      PORT=8080
      MONGO_URI=mongodb://localhost:27017/you_db_name
@@ -84,25 +101,6 @@ In this project, I have developed a Library Management System using GraphQL API.
 ### 7. Start the server:
    ```
      yarn dev
-   ```
-    
-## **Docker Setup**   
-
-### 1. Build Docker Image
-   ```
-     docker build -t library-system .
-   ```
-### 2. Run Docker Container
-   ```
-      docker run -p 8080:8080 library-system
-   ```
-### 3. Check Running Containers
-   ```
-     docker ps
-   ```
-### 4. Stop Docker Container
-   ```
-      docker stop container-id
    ```
 
     
