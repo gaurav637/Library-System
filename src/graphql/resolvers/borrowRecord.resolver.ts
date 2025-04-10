@@ -76,28 +76,28 @@ export const borrowRecordResolver = {
                 const borrowRecord = await BorrowRecordModel.findOne({ userId, bookId });
                 if (!borrowRecord) {
                     logger.error(`Book ${bookId} Not found!!`);
-                    throw new AppError('Borrow record not found',404);
-                }
+                    throw new AppError('Borrow record not found', 404);
+                }     
                 const today = new Date();
                 let totalFine = 0;
-                let updatedData;
-                if (today > borrowRecord.returnDate) { // this condition check if user return book by late some day
+                if (today > borrowRecord.returnDate) {
                     const extraDays = Math.ceil((today.getTime() - borrowRecord.returnDate.getTime()) / (1000 * 60 * 60 * 24));
-                    totalFine = extraDays * 10; // charge 10 Rupees each day
+                    totalFine = extraDays * 10;
                     borrowRecord.fine = totalFine;
-                    updatedData = await BorrowRecordModel.updateOne(
-                        {_id: borrowRecord._id },
-                        {$set: {fine : totalFine}},
-                        { new: true }
+                    await BorrowRecordModel.updateOne(
+                        { _id: borrowRecord._id },
+                        { $set: { fine: totalFine } }
                     );
                 } else {
-                    await BorrowRecordModel.deleteOne({ userId: userId, bookId: bookId });
-                }  
-                return updatedData;
-            } catch(error) {
-                logger.error("Failed to Return a borrowed book",error);
-                throw new AppError("Failed to Return a borrowed book",500);
+                    await BorrowRecordModel.deleteOne({ userId, bookId });
+                }
+        
+                return borrowRecord;  
+            } catch (error) {
+                logger.error("Failed to Return a borrowed book", error);
+                throw new AppError("Failed to Return a borrowed book", 500);
             }
         }
+        
     }
 }

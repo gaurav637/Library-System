@@ -61,8 +61,8 @@ export const bookTypeDefs = gql`
     type Query {
         getAllBooks: [Book!]
         getBookById(id: ID!): Book
-        getBooksByFilter(filter: BookFilterInput, page: Int!, limit: Int!): PaginateBook!
-        searchBooksBySearchKey(searchKey: String!, page: Int!, limit: Int!): PaginateBook!
+        getBooksByFilter(filter: BookFilterInput, page: Int!, limit: Int!): [Book!]
+        searchBooksBySearchKey(searchKey: String!, page: Int!, limit: Int!): [Book!]
     }
 
     type Mutation {

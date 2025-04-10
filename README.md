@@ -86,7 +86,7 @@ In this project, I have developed a Library Management System using GraphQL API.
      yarn dev
    ```
     
-## ** Docker Setup **   
+## **Docker Setup**   
 
 ### 1. Build Docker Image
    ```
@@ -146,11 +146,11 @@ In this project, I have developed a Library Management System using GraphQL API.
 <img width="726" alt="Screenshot 2025-04-09 at 8 38 48 PM" src="https://github.com/user-attachments/assets/e630760b-ca34-4320-a392-3f5db5d7a142" />
 
 
-## **## API Documents**
+## **API Documents**
 
   ### Create a New User
    - **Mutation:**
-     ```json
+     ```graphql
         {
           mutation Mutation($userInput: UserInput!) {
               createNewUser(userInput: $userInput) {
@@ -160,10 +160,11 @@ In this project, I have developed a Library Management System using GraphQL API.
                    password
                    profileImage
               }
-         }"
-     }
-     ```
-   - **Description:** Creates a new User.
+         }
+      }
+
+    
+- **Description:** Creates a new User.
    - **Variables:**
      ```json
         {
@@ -180,22 +181,164 @@ In this project, I have developed a Library Management System using GraphQL API.
      - 201 Created
        ```json
          {
-             {
-              "data": {
-                "createNewUser": {
-                  "name": "Vikram Singh",
-                  "email": "vikram.singh@example.com",
-                  "phone": "9876501234",
-                  "password": "Vikram@123",
-                  "profileImage": "https://dummyimage.com/300x300/000/fff&text=Vikram"
-                }
-              }
-            }
+           "data": {
+             "createNewUser": {
+               "name": "Vikram Singh",
+               "email": "vikram.singh@example.com",
+               "phone": "9876501234",
+               "password": "$2b$10$7jxD0.4QpaSAR1b6K9lgje8UhdZ0jGCjLzxvl9fOZlcUARg9S3T/2",
+               "profileImage": "https://dummyimage.com/300x300/000/fff&text=Vikram"
+             }
+           }
+        }
+     ```
+
+  ### Update User Data
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($id: ID!, $userInput: UpdateUserInput!) {
+           updateUser(id: $id, userInput: $userInput) {
+                name
+                email
+                password
+                phone
+           }
        }
      ```
 
+   - **Description:** Update User data by UserId.
+   - **Variables:**
+     ```json
+        {
+           "id": "67f7501cc2fc20c2c29e39f0",
+           "userInput": {
+             "name": "vikram khurana 1",
+             "email": "vikram@123"
+           }
+        }
+     ```
+   - Response:
+     - 200 Updated
+       ```json
+         {
+           "data": {
+             "updateUser": {
+               "name": "vikram khurana 1",
+               "email": "vikram@123",
+               "password": "$2b$10$7jxD0.4QpaSAR1b6K9lgje8UhdZ0jGCjLzxvl9fOZlcUARg9S3T/2",
+               "phone": "9876501234"
+             }
+           }
+         }
+     ```
 
+ ### Delete User Data
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($id: ID!) {
+           deleteUser(id: $id) {
+             _id
+             name
+             email
+             phone
+           }
+        }
+     ```
 
+   - **Description:** Delete User data by UserId.
+   - **Variables:**
+     ```json
+        {
+           "id": "67f5f3893741f9d8c1f9d2f5"
+        }
+     ```
+   - Response:
+     - 200 Deleted
+       ```json
+         {
+           "data": {
+             "deleteUser": {
+               "_id": "67f5f3893741f9d8c1f9d2f5",
+               "name": "Rahul Sharma",
+               "email": "rahul.sharma@example.com",
+               "phone": "9876543210"
+             }
+           }
+         }
+     ```
+
+ ### Get All User Data
+   - **Description:** Get All Users data.
+   - **Query:**
+     ```graphql
+        query {
+           getAllUsers {
+             _id
+             name
+             email
+           }
+        }
+     ```
+
+   - Response:
+     - 200 List all Users
+       ```json
+         {
+           "data": {
+             "getAllUsers": [
+                  {
+                    "_id": "67f5f3b63741f9d8c1f9d2f7",
+                    "name": "Priya Verma",
+                    "email": "priya.verma@example.com",
+                    "password": "Priya@123"
+                  },
+                  {
+                    "_id": "67f5f3cc3741f9d8c1f9d2f9",
+                    "name": "Amit Patel",
+                    "email": "amit.patel@example.com",
+                    "password": "Amit@123"
+                  }
+              ]
+            }
+         }
+     ```
+
+ ### Get User By Id
+   - **Query:**
+     ```graphql
+        query($getUserByIdId: ID!) {
+           getUserById(id: $getUserByIdId) {
+             _id
+             name
+             email
+             phone
+             password
+           }
+         }
+     ```
+
+   - **Description:** Get User data by UserId.
+   - **Variables:**
+     ```json
+        {
+           "getUserByIdId": "67f5f3b63741f9d8c1f9d2f7"
+        }
+     ```
+   - Response:
+     - 200 get By Id
+       ```json
+         {
+           "data": {
+             "getUserById": {
+               "_id": "67f5f3b63741f9d8c1f9d2f7",
+               "name": "Priya Verma",
+               "email": "priya.verma@example.com",
+               "phone": "9123456780",
+               "password": "Priya@123"
+             }
+           }
+         }
+     ```
 
 
 

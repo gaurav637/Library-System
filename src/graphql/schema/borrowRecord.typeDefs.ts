@@ -11,6 +11,15 @@ export const borrowRecordTypeDefs = gql`
         fine: Int
     }
 
+    type BorrowReturnRecord {
+        _id: ID
+        userId: ID
+        bookId: ID
+        borrowDate: Date
+        returnDate: Date
+        fine: Int
+    }
+
     input BorrowBookInput {
         userId: ID!
         bookId: ID!
