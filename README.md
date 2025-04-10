@@ -654,25 +654,6 @@ In this project, I have developed a Library Management System using GraphQL API.
 
 ### Author:-
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Add New Author
    - **Mutation:**
      ```graphql
@@ -909,6 +890,175 @@ In this project, I have developed a Library Management System using GraphQL API.
            }
          }
      ```
+
+     
+### Borrow Records:
+
+   ### Get Borrow Book By Id
+   
+   - **Description:** Get Borrowed Books for userId.
+   - **Query:**
+     ```graphql
+        query($getBorrowedBooksByUserIdId: ID!) {
+           getBorrowedBooksByUserId(id: $getBorrowedBooksByUserIdId) {
+             _id
+             userId
+             bookId
+             fine
+           }
+       }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "getBorrowedBooksByUserIdId": "67f5f3cc3741f9d8c1f9d2f9"
+         }
+     ```
+   - Response:
+     - 200 get borrowed books for userID
+       ```json
+         {
+           "data": {
+             "getBorrowedBooksByUserId": [
+               {
+                 "_id": "67f63631da44fd4e9eaede7b",
+                 "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                 "bookId": "67f4b79c38cad949d995baf7",
+                 "fine": 10
+               },
+               {
+                 "_id": "67f6422f1af8cb4e4f357575",
+                 "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                 "bookId": "67f4b79c38cad949d995baf7",
+                 "fine": null
+               }
+             ]
+           }
+        }
+     ```
+
+### get All Borrowed Books
+
+   - **Description:** get All Borrowed Books in library
+   - **Query:**
+     ```graphql
+        query {
+           getAllBorrowedBooks {
+             _id
+             bookId
+             userId
+             borrowDate
+             fine
+           }
+       } 
+     ```
+   - Response:
+     - 200 Borrowed Books
+       ```json
+         {
+           "data": {
+             "getAllBorrowedBooks": [
+                  {
+                    "_id": "67f63603da44fd4e9eaede77",
+                    "bookId": "67f4b59db88f9faf28fd39ba",
+                    "userId": "67f5f3b63741f9d8c1f9d2f7",
+                    "borrowDate": "2025-04-01T00:00:00.000Z",
+                    "fine": null
+                  },
+                  {
+                    "_id": "67f63631da44fd4e9eaede7b",
+                    "bookId": "67f4b79c38cad949d995baf7",
+                    "userId": "67f5f3cc3741f9d8c1f9d2f9",
+                    "borrowDate": "2025-04-02T00:00:00.000Z",
+                    "fine": 10
+                  },
+                  {
+                    "_id": "67f63fb2ff409d0363b42377",
+                    "bookId": "67f3d2f3c630fbf48e31e520",
+                    "userId": "67f5f3893741f9d8c1f9d2f5",
+                    "borrowDate": "2025-04-01T00:00:00.000Z",
+                    "fine": 50
+                  }
+             ]
+          }
+        }
+     ```
+
+### Mark Book As Borrow By User
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($borrowBookInput: BorrowBookInput) {
+           markBookAsBorrowByUser(borrowBookInput: $borrowBookInput) {
+             userId,
+             bookId
+             borrowDate
+             returnDate
+           }
+        }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "borrowBookInput": {
+             "userId": "67f5f3cc3741f9d8c1f9d2f9",
+             "bookId": "67f4b79c38cad949d995baf7",
+             "borrowDate": "2025-04-01",
+             "returnDate": "2025-04-06"
+           }
+        }
+     ```
+   - Response:
+     - 200 Marked Books
+       ```json
+         {
+           "data": {
+             "markBookAsBorrowByUser": {
+               "userId": "67f5f3cc3741f9d8c1f9d2f9",
+               "bookId": "67f4b79c38cad949d995baf7",
+               "borrowDate": "2025-04-01T00:00:00.000Z",
+               "returnDate": "2025-04-06T00:00:00.000Z"
+             }
+           }
+        }
+     ```
+
+### Return Borrowed Book by user
+   - **Mutation:**
+     ```graphql
+        mutation Mutation($returnABorrowedBookByUserUserId2: ID!, $returnABorrowedBookByUserBookId2: ID!) {
+           returnABorrowedBookByUser(userId: $returnABorrowedBookByUserUserId2, bookId: $returnABorrowedBookByUserBookId2) {
+             userId
+             bookId
+             borrowDate
+             returnDate
+             fine
+           }
+       }
+     ```
+   - **Variables:**
+     ```json
+         {
+           "returnABorrowedBookByUserUserId2": "67f5f3b63741f9d8c1f9d2f7",
+           "returnABorrowedBookByUserBookId2": "67f4b59db88f9faf28fd39ba"
+        }
+     ```
+   - Response:
+     - 200 return Books
+       ```json
+         {
+           "data": {
+             "returnABorrowedBookByUser": {
+               "userId": "67f5f3b63741f9d8c1f9d2f7",
+               "bookId": "67f4b59db88f9faf28fd39ba",
+               "borrowDate": "2025-04-01T00:00:00.000Z",
+               "returnDate": "2025-04-08T00:00:00.000Z",
+               "fine": 30
+             }
+           }
+       }
+     ```
+
+
 
 ## **Contributing**
 
