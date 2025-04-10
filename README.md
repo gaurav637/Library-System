@@ -150,7 +150,7 @@ In this project, I have developed a Library Management System using GraphQL API.
 
   ### Create a New User
    - **Mutation:**
-     ```json
+     ```graphql
         {
           mutation Mutation($userInput: UserInput!) {
               createNewUser(userInput: $userInput) {
@@ -163,8 +163,8 @@ In this project, I have developed a Library Management System using GraphQL API.
          }
       }
 
-     ```
-   - **Description:** Creates a new User.
+    
+- **Description:** Creates a new User.
    - **Variables:**
      ```json
         {
@@ -195,7 +195,7 @@ In this project, I have developed a Library Management System using GraphQL API.
 
   ### Update User Data
    - **Mutation:**
-     ```json
+     ```graphql
         mutation Mutation($id: ID!, $userInput: UpdateUserInput!) {
            updateUser(id: $id, userInput: $userInput) {
                 name
@@ -234,7 +234,7 @@ In this project, I have developed a Library Management System using GraphQL API.
 
  ### Delete User Data
    - **Mutation:**
-     ```json
+     ```graphql
         mutation Mutation($id: ID!) {
            deleteUser(id: $id) {
              _id
@@ -270,7 +270,7 @@ In this project, I have developed a Library Management System using GraphQL API.
  ### Get All User Data
    - **Description:** Get All Users data.
    - **Query:**
-     ```json
+     ```graphql
         query {
            getAllUsers {
              _id
@@ -305,7 +305,7 @@ In this project, I have developed a Library Management System using GraphQL API.
 
  ### Get User By Id
    - **Query:**
-     ```json
+     ```graphql
         query($getUserByIdId: ID!) {
            getUserById(id: $getUserByIdId) {
              _id
